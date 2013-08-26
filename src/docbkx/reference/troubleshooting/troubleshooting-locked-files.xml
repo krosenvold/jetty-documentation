@@ -127,4 +127,18 @@
     This might completely redefine the default servlet configuration (not sure about that, if anyone can confirm). You could still simply extract the webdefault file as explained above, and copy-paste the complete default servlet definition in your web.xml, changing that <code>useFileMappedBuffer</code> parameter to false.
   </para>
 </section>
+
+  <section>
+    <title>Remedy for ResourceHandler</title>
+    <para>
+      If you are serving static content with a <code>ResourceHandler</code>, you will need to force this handler to avoid using NIO:
+    </para>
+    <informalexample>
+      <programlisting language="xml"><![CDATA[
+          ResourceHandler rh = ...
+          rh.setMinMemoryMappedContentLength(Integer.MAX_VALUE);
+      ]]></programlisting>
+    </informalexample>
+  </section>
+
 </section>
